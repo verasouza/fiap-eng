@@ -1,14 +1,11 @@
 FROM node:current-alpine3.21
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/backend
 
-#copiar arquivos packages
-COPY /backend/package*.json ./
+COPY . .
 
 #install dependacies
 RUN npm install
-
-COPY . .
 
 EXPOSE 8089
 
