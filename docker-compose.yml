@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: userservice  
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mongo
+    networks:
+        - local-network  
+    restart: always
+  mongo:
+      image: mongo:noble
+      container_name: mongodb
+      env_file:
+      - .env
+      ports:
+        - "27017:27017"
+      #environment:
+        #MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+        #MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PWD}
+        #MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+      volumes:
+        - mongo-data:/data/db
+      networks:
+        - local-network
+
+networks: 
+    local-network:
+      driver: bridge
+
+volumes:
+  mongo-data:
