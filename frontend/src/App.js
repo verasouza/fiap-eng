@@ -6,8 +6,12 @@ import EventsPage from './pages/EventsPage';
 
 const App = () => (
   <Router>
-    <nav>
-      <Link to="/">Home</Link> | <Link to="/create-user">Criar Usuário</Link> | <Link to="/events">Eventos</Link>
+    <nav  id={"navbar"}>
+      <div class={"item-section"}>
+        <Link to="/" className='link-home'>Home</Link>
+        <Link to="/create-user" className='link-create-user'>Criar Usuário</Link>
+        <Link to="/events" className='link-events'>Eventos</Link>
+      </div>
     </nav>
     <Routes>
       <Route path="/" element={<HomePage />} />

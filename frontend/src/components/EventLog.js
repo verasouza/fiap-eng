@@ -15,14 +15,42 @@ const EventLog = () => {
     };
   }, []);
 
+  const handleDelete = async (event) => {
+    alert('evento apagado!')
+  };
+
+  const clearEvents = async () => {
+    alert('log de eventos esvaziado.')
+  }
+
   return (
     <div>
-      <h2>Log de Eventos</h2>
-      <ul>
-        {events.map((event, index) => (
-          <li key={index}>{JSON.stringify(event)}</li>
-        ))}
-      </ul>
+      <h2>Log de eventos</h2>
+      <div>
+        <hr></hr>
+        <table>
+          <tbody>
+          <tr>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Detalhe</th>
+          </tr>
+          {events.map((event) => (
+            <tr>
+              <td class={"id"}>{event.timestamp}</td>
+              <td>{event.name}</td>
+              <td>{event.detail}</td>
+              <td class={"actions"}>
+                <button className='remove' onClick={() => handleDelete(event._id)}>Excluir</button>
+              </td>
+            </tr>
+          ))}
+          </tbody>
+          <tr class={"clear"}>
+            <button className='clear' onClick={() => clearEvents()}>Limpar</button>
+          </tr>
+        </table>
+      </div>
     </div>
   );
 };

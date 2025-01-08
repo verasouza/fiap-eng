@@ -1,3 +1,5 @@
+html, body { height: 100%; }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +12,167 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#navbar {
+  background: #6b0cd1;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item-section {
+  max-width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.item-section * {
+  display: flex;
+  margin: 0 10px;
+}
+
+.item-section a {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+main div hr {
+  border: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.04);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  width: 100%;
+}
+
+table {
+  border-radius: 3px;
+  margin: auto;
+  width: 90%;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  border-bottom: 1px solid #cecece;
+}
+
+td.actions {
+  max-width: 120px;
+  min-width: 100%;
+  flex: 1 1 100px;
+  justify-content: center;
+  align-items: stretch;
+  min-height: 100%!important;
+  padding: 8px;
+}
+
+button {
+  border-radius: 5px;
+  padding: 6px 12px;
+  max-width: 40%;
+  height: auto;
+  min-height: 30px;
+  border: none;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+button.remove {
+  background: linear-gradient(145deg, #cc1515, #e00000);
+  color: white;
+  transition: 1s;
+}
+
+button.edit {
+  background: linear-gradient(145deg, #e07319, #f29c4e);
+  color: white;
+  transition: 1s;
+}
+
+button.create {
+  background: #ddd;
+  color: black;
+  transition: 1s;
+}
+
+button:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+button.remove:hover {
+  background: linear-gradient(145deg, #b51313, #d00000);
+  
+}
+
+button.edit:hover {
+  background: linear-gradient(145deg, #d66119, #f69b45);
+}
+
+button.create:hover {
+  background: linear-gradient(145deg, #15cc24, #00e01e);
+}
+
+td.id {
+  max-width: 150px;
+  min-width: 100px;
+  flex: 1 1 100px;
+}
+
+tr.create button {
+  position: relative;
+}
+
+td:not(.id):not(.actions) {
+  flex: 2 1 200px;
+}
+
+table tr:last-child {
+  border-bottom: none !important;
+}
+
+.item-section a.current {
+  background-image: linear-gradient(44deg #6e27bb #560fa1 #7e42be);
+  border-bottom: 2px solid #cecece;
 }
