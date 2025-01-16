@@ -1,4 +1,4 @@
-html, body { height: 100%; }
+html, body, #root { height: max-content; }
 
 body {
   margin: 0;
@@ -9,22 +9,53 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-#navbar {
-  background: #6b0cd1;
+nav {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+  /* background: #6b0cd1; */
+  background-image: linear-gradient(44deg, #1cd3b4, #ef2199, #f38a13, #ef2154, #1cd3b4, #ef2199, #f38a13, #ef2154);
   width: 100%;
   height: 50px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
+  padding: 0;
+}
+
+.nav-logo {
+  position: relative;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo img {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: background-image 1s;
+}
+
+.nav-logo img:hover {
+  background: linear-gradient(50deg, #ef2199, #f38a13);
 }
 
 .item-section {
-  max-width: 20%;
+  position: relative;
   height: 100%;
   display: flex;
   align-items: center;
@@ -38,13 +69,24 @@ code {
 
 .item-section a {
   height: 100%;
+  word-wrap: unset;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: 0 10px;
   color: #fff;
   font-weight: 600;
   text-decoration: none;
-  width: 100%;
+  width: calc(max-content + 20);
+}
+
+.item-section a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+
+.item-section a.current {
+  z-index: 2;
+  background: linear-gradient(44deg #1cd3b4, #ef2199, #f38a13);
+  border: 2px solid #fff;
 }
 
 main {
@@ -65,10 +107,19 @@ main div {
 main div hr {
   border: 0;
   height: 1px;
-  background-color: rgba(0, 0, 0, 0.04);
+  background: linear-gradient(0deg, #d4d4d4, #e4e4e4, #e7e7e7, #fff);
+  /* background: rgba(0, 0, 0, 0.02); */
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.8);
   margin: 0;
   width: 100%;
+}
+
+.outer {
+  background: linear-gradient(360deg, rgba(0, 0, 0, 0.2), #fff);
+}
+
+.inner {
+  background-color: white;
 }
 
 table {
@@ -93,10 +144,56 @@ td.actions {
   max-width: 120px;
   min-width: 100%;
   flex: 1 1 100px;
+  flex-direction: row;
   justify-content: center;
   align-items: stretch;
   min-height: 100%!important;
   padding: 8px;
+}
+
+@media screen and (max-width: 563px) {
+  td.actions {
+    flex-direction: column;
+  }
+  table, tbody {
+    width: 100%;
+  }
+  table * {
+    font-size: 12px;
+  }
+  td button {
+    font-size: 8px;
+    min-width: 80%;
+  }
+}
+
+@media screen and (max-width: 372px) {
+  td button {
+    min-width: max-content;
+  }
+  
+  td button i {
+    display: block;
+  }
+
+  td button span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 757px) {
+  td.actions {
+    flex-direction: column;
+  }
+  table * {
+    font-size: 14px;
+  }
+  td button {
+    min-width: 80%;
+  }
+  td button span {
+    font-size: 12px;
+  }
 }
 
 button {
@@ -128,7 +225,7 @@ button.edit {
 }
 
 button.create {
-  background: #ddd;
+  background: #16b398;
   color: black;
   transition: 1s;
 }
@@ -151,7 +248,7 @@ button.edit:hover {
 }
 
 button.create:hover {
-  background: linear-gradient(145deg, #15cc24, #00e01e);
+  background: linear-gradient(145deg, #16b398, #1fe2c2);
 }
 
 td.id {
@@ -160,7 +257,17 @@ td.id {
   flex: 1 1 100px;
 }
 
-tr.create button {
+tr.controls {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 0;
+}
+
+tr.controls button {
+  display: flex;
   position: relative;
 }
 
@@ -168,11 +275,140 @@ td:not(.id):not(.actions) {
   flex: 2 1 200px;
 }
 
+table tr:first-child {
+  padding: 10px 0!important;
+}
+
 table tr:last-child {
   border-bottom: none !important;
 }
 
-.item-section a.current {
-  background-image: linear-gradient(44deg #6e27bb #560fa1 #7e42be);
-  border-bottom: 2px solid #cecece;
+footer {
+  z-index: -1;
+  background-color: transparent;
+  position: relative;
+  bottom: -70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-height: 700px;
+  padding: 10px 0;
+  text-align: center;
+}
+
+footer .rev {
+  width: 100%;
+  height: 500px;
+  transform: skewY(-5deg);
+  background: linear-gradient(90deg, SlateBlue, DodgerBlue, MediumSeaGreen);
+}
+
+footer .rev-content {
+  margin-top: 120px;
+  transform: skewY(5deg);
+}
+
+footer .rev-content p {
+  color: #eeeeee;
+  font-weight: bold;
+}
+
+footer .rev-content a {
+  text-decoration: underline;
+  color: #fefefe;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 757px) {
+
+  /* footer {
+    position: fixed;
+    bottom: -500px;
+    transform: translateY(700px);
+  } */
+}
+
+@media screen and (min-width: 758px) {
+  body {
+    overflow: hidden;
+  }
+}
+
+.userFormBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userFormPanel {
+  position: relative;
+  width: 60%;
+  height: 50%;
+  background-color: #e4e4e4;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
+}
+
+.userForm-topPanel {
+  width: 100%;
+  border-bottom: 1px solid #cecece;
+  justify-content: flex-end;
+}
+
+.userForm-topPanel,
+.userForm-topPanel-close {
+  display: flex;
+  height: 20px;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px 0;
+}
+
+.userForm-topPanel-close {
+  background-color: #b51313;
+  width: 20px;
+  justify-content: center;
+}
+
+.userForm-lowerPanel {
+  display: flex;
+  align-self: flex-end;
+  width: 100%;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #cecece;
+  margin: 0;
+  padding: 0;
+}
+
+.userForm-lowerPanel button.create {
+  display: flex;
+}
+
+.userFormBackground .active, 
+.userFormPanel .active {
+  display: flex;
+}
+
+.userFormBackground .disabled, 
+.userFormPanel .disabled {
+  display: none;
+}
+
+.userFormPanel form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }

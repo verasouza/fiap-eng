@@ -24,9 +24,9 @@ const EventLog = () => {
   }
 
   return (
-    <div>
+    <div class={'outer'}>
       <h2>Log de eventos</h2>
-      <div>
+      <div class={'inner'}>
         <hr></hr>
         <table>
           <tbody>
@@ -47,7 +47,8 @@ const EventLog = () => {
           ))}
           </tbody>
           <tr class={"clear"}>
-            <button className='clear' onClick={() => clearEvents()}>Limpar</button>
+            <button className='remove' onClick={() => clearEvents()}>Limpar</button>
+            <button className='create' onClick={() => clearEvents()}>Exportar</button>
           </tr>
         </table>
       </div>

@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 
 const UserForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
-    name: initialData.name || '',
     email: initialData.email || '',
-    age: initialData.age || '',
+    password: initialData.password || '',
   });
 
   const handleChange = (e) => {
@@ -20,14 +19,6 @@ const UserForm = ({ onSubmit, initialData = {} }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
-        name="name"
-        placeholder="Nome"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-      <input
         type="email"
         name="email"
         placeholder="Email"
@@ -36,16 +27,14 @@ const UserForm = ({ onSubmit, initialData = {} }) => {
         required
       />
       <input
-        type="number"
-        name="age"
-        placeholder="Idade"
-        value={formData.age}
+        type="password"
+        name="password"
+        placeholder="Nome"
+        value={formData.password}
         onChange={handleChange}
         required
       />
-      <div class={"userForm-lowerPanel"}>
-        <button class="create" type="submit">Salvar</button>
-      </div>
+      <button class="login" type="submit">Login</button>
     </form>
   );
 };
