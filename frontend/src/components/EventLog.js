@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 const EventLog = () => {
   const [events, setEvents] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(8)
 
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:3000/events');
@@ -41,14 +43,14 @@ const EventLog = () => {
               <td>{event.name}</td>
               <td>{event.detail}</td>
               <td class={"actions"}>
-                <button className='remove' onClick={() => handleDelete(event._id)}>Excluir</button>
+                <button className='remove' onClick={() => handleDelete(event._id)}><span>Excluir</span></button>
               </td>
             </tr>
           ))}
           </tbody>
           <tr class={"clear"}>
-            <button className='remove' onClick={() => clearEvents()}>Limpar</button>
-            <button className='create' onClick={() => clearEvents()}>Exportar</button>
+            <button className='remove' onClick={() => clearEvents()}><span>Limpar</span></button>
+            <button className='create' onClick={() => clearEvents()}><span>Exportar</span></button>
           </tr>
         </table>
       </div>
