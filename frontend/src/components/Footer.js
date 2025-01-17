@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <div class={'rev'}>
         <div class={'rev-content'}>
-          <p>Copyright &copy; 2024 - 2025 CRM Easy</p>
+          <p>Copyright &copy; 2025 CRM Easy</p>
           <a href="#" class={'lgpd'}>Política de privacidade</a>
         </div>
       </div>
