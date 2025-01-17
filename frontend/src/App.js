@@ -9,8 +9,8 @@ const App = () => (
   <Router>
     <nav  id={"navbar"}>
       <div class={"item-section"}>
-        <Link to="/" className='link-home'>Home</Link>
-        <Link to="/create-user" className='link-create-user'>Criar Usuário</Link>
+        <Link to="/" className='link-home'>Usuários</Link>
+        {/* <Link to="/create-user" className='link-create-user'>Criar Usuário</Link> */}
         <Link to="/events" className='link-events'>Eventos</Link>
       </div>
       <div class={"nav-logo"}>
