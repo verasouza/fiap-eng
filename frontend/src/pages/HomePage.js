@@ -2,10 +2,10 @@ import React from 'react';
 import UserList from '../pages/UserList';
 
 const HomePage = () => (
-  <div>
+  <main>
     <h1>Gestão de Usuários</h1>
     <UserList />
-  </div>
+  </main>
 );
 
 export default HomePage;

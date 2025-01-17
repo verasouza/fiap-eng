@@ -1,5 +1,4 @@
 import React from 'react';
-import EventLog from '../components/EventLog';
 
 const EventsPage = () => (
   <main>
