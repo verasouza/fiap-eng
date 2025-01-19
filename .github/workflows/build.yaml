@@ -1,0 +1,22 @@
+name: Docker Publish
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_USERNAME: ${{ secrets.MONGO_USERNAME }}
+      MONGODB_PWD: ${{ secrets.MONGO_PWD }}
+      MONGODB_DATABASE: ${{ secrets.MONDO_DATABASE }}
+
+    steps:
+      - name: Checkout repo files
+      - uses: actions/checkout@v4
+      - name: Build docker-compose
+        uses: addnab/docker-run-action@v3
+        with:
+          image: docker/compose:latest
+          options: -v ${{ github.workspace }}:/var/www
+          run: docker-compose -f ./docker-compose.yml
