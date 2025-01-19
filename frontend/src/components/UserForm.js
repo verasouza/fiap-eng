@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 
-const UserForm = ({ onSubmit, initialData = {} }) => {
-  const [formData, setFormData] = useState({
-    name: initialData.name || '',
-    email: initialData.email || '',
-    age: initialData.age || '',
-  });
+const UserForm = ({ user, onSubmit }) => {
+  const [formData, setFormData] = useState(user || {name:'', email: '', age: ''} );
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers, deleteUser, createUser } from '../api';
+import { getUsers, deleteUser, createUser, updateUser } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUserXmark, faUserPen, faUser } from '@fortawesome/free-solid-svg-icons';
 import Popup from '../components/Popup';
@@ -11,6 +11,7 @@ const UserList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 8;
   const [buttonPopup, setPopup] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -27,9 +28,12 @@ const UserList = () => {
 
   const handleCreateUser = async (userData) => {
     try {
-      const newUser = await createUser(userData);
-      setUsers((prevUsers) => [...prevUsers, newUser]);
+      await createUser(userData);
+      const {data} = await getUsers();
+      setUsers(data);
+      setPopup(false);
       alert('Usuário criado com sucesso!');
+     
     } catch (error) {
       if (error.response && error.response.status === 400) {
         alert('Erro 400: Dados inválidos. Por favor, revise as informações enviadas: ' + JSON.stringify(error.response));
@@ -39,6 +43,23 @@ const UserList = () => {
       }
     }
   }
+
+  const handleEditUser = async (updatedUser) => {
+    try {
+      await updateUser(updatedUser._id, updatedUser); 
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === updatedUser._id ? updatedUser : user
+        )
+      );
+      setPopup(false);
+      alert('Usuário atualizado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao editar usuário:', error);
+      alert('Erro ao editar usuário. Tente novamente mais tarde.');
+    }
+  };
+  
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -64,13 +85,13 @@ const UserList = () => {
               <td>{user.email}</td>
               <td className={"actions"}>
                 <button className='remove' onClick={() => handleDelete(user._id)}><FontAwesomeIcon icon={faUserXmark} /><span>Excluir</span></button>
-                <button className='edit' onClick={() => alert('editado!')}><FontAwesomeIcon icon={faUserPen} /><span>Editar</span></button>
+                <button className='edit' onClick={() =>{setSelectedUser(user);  setPopup(true);}}><FontAwesomeIcon icon={faUserPen} /><span>Editar</span></button>
               </td>
             </tr>
           ))}
           <tr className={"controls"}>
             <div>
-              <button className='create' onClick={() => setPopup(true)}><FontAwesomeIcon icon={faUserPlus} /><span>Criar</span></button>
+              <button className='create' onClick={() => {setSelectedUser(null);  setPopup(true);}}><FontAwesomeIcon icon={faUserPlus} /><span>Criar</span></button>
             </div>
             <div className={"pagination"}>
               <Pagination 
@@ -85,7 +106,7 @@ const UserList = () => {
         </table>
       </div>
       <Popup trigger={buttonPopup} setTrigger={setPopup}>
-        <UserForm onSubmit={handleCreateUser}/>
+        <UserForm user={selectedUser} onSubmit={selectedUser ? handleEditUser : handleCreateUser}/>
       </Popup>
     </div>
   );
