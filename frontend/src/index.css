@@ -24,7 +24,7 @@ code {
 nav {
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
   /* background: #6b0cd1; */
-  background-image: linear-gradient(44deg, #1cd3b4, #ef2199, #f38a13, #ef2154, #1cd3b4, #ef2199, #f38a13, #ef2154);
+  background: linear-gradient(44deg, MediumSeaGreen, DodgerBlue, SlateBlue);
   width: 100%;
   height: 50px;
   display: flex;
@@ -47,11 +47,10 @@ nav {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: background-image 1s;
 }
 
 .nav-logo img:hover {
-  background: linear-gradient(50deg, #ef2199, #f38a13);
+  background: linear-gradient(50deg, DodgerBlue, SlateBlue);
 }
 
 .item-section {
@@ -90,10 +89,17 @@ nav {
 }
 
 main {
+  margin-top: -80px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (max-width: 756px) {
+  main {
+    margin-top: 0;
+  }
 }
 
 main div {
@@ -126,6 +132,7 @@ table {
   border-radius: 3px;
   margin: auto;
   width: 90%;
+  /* height: 600px; */
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 16px 0 rgba(0, 0, 0, 0.19);
   table-layout: fixed;
   border-spacing: 0;
@@ -138,6 +145,9 @@ th, td {
   box-sizing: border-box;
   word-wrap: break-word;
   border-bottom: 1px solid #cecece;
+  /* min-height: max-content;
+  height: max-content;
+  max-height: max-content; */
 }
 
 td.actions {
@@ -161,9 +171,11 @@ button * {
   td.actions {
     flex-direction: column;
   }
-  table, tbody {
+  /* table, tbody {
+    min-height: max-content;
+    height: max-content;
     width: 100%;
-  }
+  } */
   table * {
     font-size: 12px;
   }
@@ -189,7 +201,7 @@ button * {
 
 @media screen and (min-width: 373px) {
   td button svg {
-    display: none!important;
+    display: flex!important;
   }
 
   td button span {
@@ -203,7 +215,7 @@ button * {
   }
 }
 
-@media screen and (max-width: 757px) {
+@media screen and (max-width: 756px) {
   td.actions {
     flex-direction: column;
   }
@@ -213,8 +225,21 @@ button * {
   td button {
     min-width: 80%;
   }
+  td button svg {
+    display: flex!important;
+  }
   td button span {
     font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  td button svg {
+    display: flex!important;
+  }
+
+  td button span {
+    display: flex!important;
   }
 }
 
@@ -226,7 +251,6 @@ button {
   min-height: 30px;
   border: none;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
   font-size: 12px;
   cursor: pointer;
   text-align: center;
@@ -241,19 +265,16 @@ button {
 button.remove {
   background: linear-gradient(145deg, #cc1515, #e00000);
   color: white;
-  transition: 1s;
 }
 
 button.edit {
   background: linear-gradient(145deg, #e07319, #f29c4e);
   color: white;
-  transition: 1s;
 }
 
 button.create {
   background: linear-gradient(145deg, MediumSeaGreen, #16b398);
   color: black;
-  transition: 1s;
 }
 
 .pagination button:not(.index) {
@@ -265,11 +286,11 @@ button.create {
 }
 
 .pagination button.currentPage {
-  background: linear-gradient(145deg, MediumSeaGreen, #e07319);
+  background: linear-gradient(145deg, MediumSeaGreen, SlateBlue);
 }
 
 .pagination button.currentPage:hover {
-  background: linear-gradient(145deg, #e07319, DodgerBlue);
+  background: linear-gradient(145deg, SlateBlue, DodgerBlue);
 }
 
 button:hover {
@@ -301,8 +322,7 @@ td.id {
 
 tr.controls {
   display: flex;
-  min-width: 100%;
-  width: 100%;
+  width: max-content;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
@@ -310,6 +330,7 @@ tr.controls {
 }
 
 tr.controls div {
+  width: max-content;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -324,14 +345,15 @@ tr.controls * {
 tr.controls button {
   display: flex;
   flex-direction: row;
+  width: max-content;
+  max-width: max-content;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
 @media screen and (max-width: 757px) {
-  tr.controls {
-    width: 100%;
+  tr.controls { 
     align-items: center;
     justify-content: center;
   }
@@ -341,6 +363,24 @@ tr.controls button {
 }
 
 @media screen and (min-width: 758px) {
+  tr.controls .create span {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  td.actions button svg {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 563px) {
+  tr.controls button span {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1500px) {
   tr.controls .create span {
     display: flex;
   }
@@ -359,50 +399,24 @@ table tr:last-child {
 }
 
 footer {
-  z-index: -1;
-  background-color: transparent;
+  background: linear-gradient(44deg, MediumSeaGreen, DodgerBlue, SlateBlue);
   position: relative;
-  bottom: -70px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  max-height: 700px;
   padding: 10px 0;
   text-align: center;
 }
 
-footer .rev {
-  width: 100%;
-  height: 500px;
-  transform: skewY(-5deg);
-  background: linear-gradient(90deg, SlateBlue, DodgerBlue, MediumSeaGreen);
-}
-
-footer .rev-content {
-  margin-top: 120px;
-  transform: skewY(5deg);
-}
-
-footer .rev-content p {
-  color: #eeeeee;
+footer * {
+  color: #e0e0e0;
   font-weight: bold;
 }
 
-footer .rev-content a {
-  text-decoration: underline;
-  color: #fefefe;
-  font-weight: 400;
-}
-
-@media screen and (max-width: 757px) {
-
-  /* footer {
-    position: fixed;
-    bottom: -500px;
-    transform: translateY(700px);
-  } */
+footer a:hover {
+  color: #fff;
 }
 
 @media screen and (min-width: 758px) {
