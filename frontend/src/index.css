@@ -410,8 +410,13 @@ footer {
   text-align: center;
 }
 
-footer * {
-  color: #e0e0e0;
+footer p {
+  color: #fff;
+  font-weight: bold;
+}
+
+footer a {
+  color: #dfdfdf;
   font-weight: bold;
 }
 
