@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EventLog = () => {
   const [events, setEvents] = useState([]);
@@ -18,7 +19,7 @@ const EventLog = () => {
   }, []);
 
   const handleDelete = async (event) => {
-    alert('evento apagado!')
+    
   };
 
   const clearEvents = async () => {
@@ -32,26 +33,27 @@ const EventLog = () => {
         <hr></hr>
         <table>
           <tbody>
-          <tr>
-            <th>Data</th>
-            <th>Nome</th>
-            <th>Detalhe</th>
-          </tr>
-          {events.map((event) => (
             <tr>
-              <td class={"id"}>{event.timestamp}</td>
-              <td>{event.name}</td>
-              <td>{event.detail}</td>
-              <td class={"actions"}>
-                <button className='remove' onClick={() => handleDelete(event._id)}><span>Excluir</span></button>
-              </td>
+              <th>Data</th>
+              <th>Nome</th>
+              <th>Detalhe</th>
             </tr>
-          ))}
+            {events.map((event) => (
+              <tr>
+                <td class={"id"}>{event.timestamp}</td>
+                <td>{event.name}</td>
+                <td>{event.detail}</td>
+                <td class={"actions"}>
+                  <button className='remove' onClick={() => handleDelete(event._id)}><span>Excluir</span></button>
+                </td>
+              </tr>
+            ))}
+            <tr class={"controls"}>
+              <div>
+                <button className='remove' onClick={() => clearEvents()}><FontAwesomeIcon icon="fa-solid fa-broom" /><span>Limpar</span></button>
+              </div>
+            </tr>
           </tbody>
-          <tr class={"clear"}>
-            <button className='remove' onClick={() => clearEvents()}><span>Limpar</span></button>
-            <button className='create' onClick={() => clearEvents()}><span>Exportar</span></button>
-          </tr>
         </table>
       </div>
     </div>
