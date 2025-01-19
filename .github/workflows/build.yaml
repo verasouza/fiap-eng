@@ -19,7 +19,6 @@ jobs:
         with:
           image: docker/compose:latest
           options: -v ${{ github.workspace }}:/var/www
-          run: |
-            docker-compose -f ./docker-compose.yml
+          run: docker-compose -f ./docker-compose.yml
       
         
