@@ -1,0 +1,17 @@
+name: Docker Publish
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      MONGODB_USERNAME: ${{ secrets.MONGO_USERNAME }}
+      MONGODB_PWD: ${{ secrets.MONGO_PWD }}
+      MONGODB_DATABASE: ${{ secrets.MONDO_DATABASE }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build docker-compose
+        run: docker-compose -f docker-compose.yml
