@@ -8,8 +8,8 @@ import Pagination from '../components/Pagination';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(2)
-  const [postsPerPage, setPostsPerPage] = useState(8)
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 8;
   const [buttonPopup, setPopup] = useState(false);
 
   useEffect(() => {
@@ -18,17 +18,17 @@ const UserList = () => {
       setUsers(data);
     };
     fetchUsers();
-  }, [users]);
+  }, []);
 
   const handleDelete = async (id) => {
     await deleteUser(id);
-    setUsers(users.filter((user) => user._id !== id));
+    setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
   };
 
   const handleCreateUser = async (userData) => {
     try {
-      await createUser(userData);
-      setUsers(await getUsers());
+      const newUser = await createUser(userData);
+      setUsers((prevUsers) => [...prevUsers, newUser]);
       alert('Usuário criado com sucesso!');
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -42,12 +42,12 @@ const UserList = () => {
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentUsers = users.slice(firstPostIndex, lastPostIndex)
+  const currentUsers = users.slice(firstPostIndex, lastPostIndex);
 
   return (
-    <div class={'outer'}>
+    <div className={'outer'}>
       <h2>Lista de Usuários</h2>
-      <div class={'inner'}>
+      <div className={'inner'}>
         <hr></hr>
         <table>
           <tbody>
@@ -58,21 +58,21 @@ const UserList = () => {
             <th>Ações</th>
           </tr>
           {currentUsers.map((user) => (
-            <tr>
-              <td class={"id"}>{user._id}</td>
+            <tr key={user._id}>
+              <td className={"id"}>{user._id}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td class={"actions"}>
+              <td className={"actions"}>
                 <button className='remove' onClick={() => handleDelete(user._id)}><FontAwesomeIcon icon={faUserXmark} /><span>Excluir</span></button>
                 <button className='edit' onClick={() => alert('editado!')}><FontAwesomeIcon icon={faUserPen} /><span>Editar</span></button>
               </td>
             </tr>
           ))}
-          <tr class={"controls"}>
+          <tr className={"controls"}>
             <div>
               <button className='create' onClick={() => setPopup(true)}><FontAwesomeIcon icon={faUserPlus} /><span>Criar</span></button>
             </div>
-            <div class={"pagination"}>
+            <div className={"pagination"}>
               <Pagination 
                 totalPosts={users.length} 
                 postsPerPage={postsPerPage} 
