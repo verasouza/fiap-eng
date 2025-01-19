@@ -8,7 +8,7 @@ import Pagination from '../components/Pagination';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(2)
   const [postsPerPage, setPostsPerPage] = useState(8)
   const [buttonPopup, setPopup] = useState(false);
 
@@ -18,7 +18,7 @@ const UserList = () => {
       setUsers(data);
     };
     fetchUsers();
-  }, []);
+  }, [users]);
 
   const handleDelete = async (id) => {
     await deleteUser(id);
@@ -28,10 +28,11 @@ const UserList = () => {
   const handleCreateUser = async (userData) => {
     try {
       await createUser(userData);
+      setUsers(await getUsers());
       alert('Usuário criado com sucesso!');
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert('Erro 400: Dados inválidos. Por favor, revise as informações enviadas.');
+        alert('Erro 400: Dados inválidos. Por favor, revise as informações enviadas: ' + JSON.stringify(error.response));
       } else {
         console.error('Erro inesperado:', error);
         alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
@@ -56,7 +57,7 @@ const UserList = () => {
             <th>E-mail</th>
             <th>Ações</th>
           </tr>
-          {users.map((user) => (
+          {currentUsers.map((user) => (
             <tr>
               <td class={"id"}>{user._id}</td>
               <td>{user.name}</td>
