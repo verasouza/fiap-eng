@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Pagination from './Pagination';
 
 const EventLog = () => {
   const [events, setEvents] = useState([]);
@@ -26,6 +27,10 @@ const EventLog = () => {
     alert('log de eventos esvaziado.')
   }
 
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentEvents = events.slice(firstPostIndex, lastPostIndex)
+
   return (
     <div class={'outer'}>
       <h2>Log de eventos</h2>
@@ -38,7 +43,7 @@ const EventLog = () => {
               <th>Nome</th>
               <th>Detalhe</th>
             </tr>
-            {events.map((event) => (
+            {currentEvents.map((event) => (
               <tr>
                 <td class={"id"}>{event.timestamp}</td>
                 <td>{event.name}</td>
@@ -51,6 +56,14 @@ const EventLog = () => {
             <tr class={"controls"}>
               <div>
                 <button className='remove' onClick={() => clearEvents()}><FontAwesomeIcon icon="fa-solid fa-broom" /><span>Limpar</span></button>
+              </div>
+              <div class={"pagination"}>
+                <Pagination 
+                  totalPosts={events.length} 
+                  postsPerPage={postsPerPage} 
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
               </div>
             </tr>
           </tbody>
